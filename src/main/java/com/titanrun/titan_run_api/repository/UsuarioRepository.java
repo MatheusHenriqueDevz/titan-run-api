@@ -7,4 +7,5 @@ import com.titanrun.titan_run_api.model.Usuario;
 @Repository
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
     
+    boolean existByEmail(String email);
 }
