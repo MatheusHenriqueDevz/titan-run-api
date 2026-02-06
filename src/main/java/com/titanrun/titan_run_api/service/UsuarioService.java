@@ -1,5 +1,6 @@
 package com.titanrun.titan_run_api.service;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.titanrun.titan_run_api.repository.UsuarioRepository;
 import com.titanrun.titan_run_api.dto.UsuarioCreateDTO;
@@ -11,9 +12,11 @@ import com.titanrun.titan_run_api.model.Usuario;
 public class UsuarioService {
 
     private final UsuarioRepository repository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UsuarioService(UsuarioRepository repository){
+    public UsuarioService(UsuarioRepository repository, PasswordEncoder passwordEncoder){
         this.repository = repository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public UsuarioResponseDTO cadastrarUsuario(UsuarioCreateDTO dto) {
@@ -24,7 +27,8 @@ public class UsuarioService {
         Usuario novoUsuario = new Usuario();
         novoUsuario.setNome(dto.nome());
         novoUsuario.setEmail(dto.email());
-        novoUsuario.setSenha(dto.senha());
+        String senhaCriptografada = passwordEncoder.encode(dto.senha());
+        novoUsuario.setSenha(senhaCriptografada);
 
         Usuario usuarioSalvo = repository.save(novoUsuario);
 
