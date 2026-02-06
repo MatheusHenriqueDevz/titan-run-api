@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 import com.titanrun.titan_run_api.repository.UsuarioRepository;
 import com.titanrun.titan_run_api.dto.UsuarioCreateDTO;
 import com.titanrun.titan_run_api.dto.UsuarioResponseDTO;
-import com.titanrun.titan_run_api.model.Usuario;;
+import com.titanrun.titan_run_api.model.Usuario;
 
 
 @Service
@@ -17,7 +17,7 @@ public class UsuarioService {
     }
 
     public UsuarioResponseDTO cadastrarUsuario(UsuarioCreateDTO dto) {
-        if (repository.existByEmail(dto.email())) {
+        if (repository.existsByEmail(dto.email())) {
             throw new IllegalArgumentException("Este email já está em uso, tente outro email.");
         }
 
