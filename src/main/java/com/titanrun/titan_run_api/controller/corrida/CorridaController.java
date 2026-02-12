@@ -12,8 +12,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/corridas")
 public class CorridaController {
-    private final CorridaService service;
 
+    private final CorridaService service;
     public CorridaController(CorridaService service){
         this.service = service;
     }
