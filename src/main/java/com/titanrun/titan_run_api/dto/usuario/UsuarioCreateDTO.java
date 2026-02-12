@@ -1,4 +1,4 @@
-package com.titanrun.titan_run_api.dto;
+package com.titanrun.titan_run_api.dto.usuario;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

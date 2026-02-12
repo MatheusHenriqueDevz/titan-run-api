@@ -1,4 +1,4 @@
-package com.titanrun.titan_run_api.controller;
+package com.titanrun.titan_run_api.controller.usuario;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.titanrun.titan_run_api.dto.UsuarioCreateDTO;
-import com.titanrun.titan_run_api.dto.UsuarioResponseDTO;
-import com.titanrun.titan_run_api.service.UsuarioService;
+import com.titanrun.titan_run_api.dto.usuario.UsuarioCreateDTO;
+import com.titanrun.titan_run_api.dto.usuario.UsuarioResponseDTO;
+import com.titanrun.titan_run_api.service.usuario.UsuarioService;
 
 @RestController
 @RequestMapping("/usuarios")

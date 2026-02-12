@@ -1,11 +1,11 @@
-package com.titanrun.titan_run_api.service;
+package com.titanrun.titan_run_api.service.usuario;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import com.titanrun.titan_run_api.repository.UsuarioRepository;
-import com.titanrun.titan_run_api.dto.UsuarioCreateDTO;
-import com.titanrun.titan_run_api.dto.UsuarioResponseDTO;
-import com.titanrun.titan_run_api.model.Usuario;
+import com.titanrun.titan_run_api.repository.usuario.UsuarioRepository;
+import com.titanrun.titan_run_api.dto.usuario.UsuarioCreateDTO;
+import com.titanrun.titan_run_api.dto.usuario.UsuarioResponseDTO;
+import com.titanrun.titan_run_api.model.usuario.Usuario;
 
 
 @Service

@@ -1,7 +1,8 @@
-package com.titanrun.titan_run_api.controller;
+package com.titanrun.titan_run_api.controller.corrida;
 
-import com.titanrun.titan_run_api.dto.CorridaDTO;
-import com.titanrun.titan_run_api.service.CorridaService;
+import com.titanrun.titan_run_api.dto.corrida.CorridaResponseDTO;
+import com.titanrun.titan_run_api.dto.corrida.CorridaCreateDTO;
+import com.titanrun.titan_run_api.service.corrida.CorridaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,15 +20,15 @@ public class CorridaController {
 
     //POST
     @PostMapping
-    public ResponseEntity<CorridaDTO> criar(@RequestBody CorridaDTO dto){
-        CorridaDTO corridaCriada = service.criarCorrida(dto);
+    public ResponseEntity<CorridaResponseDTO> criar(@RequestBody CorridaCreateDTO dto){
+        CorridaResponseDTO corridaCriada = service.criarCorrida(dto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(corridaCriada);
     }
 
     //GET
     @GetMapping
-    public List<CorridaDTO> listar(){
+    public List<CorridaResponseDTO> listar(){
         return service.listarTodas();
     }
 }
