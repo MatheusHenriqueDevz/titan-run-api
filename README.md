@@ -22,7 +22,7 @@ Desenvolver uma solução backend robusta que permita:
 
 ```bash
 # Clone este repositório
-$ git clone [https://github.com/SEU_USUARIO/titan-run-api.git](https://github.com/SEU_USUARIO/titan-run-api.git)
+$ git clone [https://github.com/MatheusHenriqueDevz/titan-run-api.git](https://github.com/MatheusHenriqueDevz/titan-run-api.git)
 
 # Acesse a pasta do projeto no terminal/cmd
 $ cd titan-run-api
