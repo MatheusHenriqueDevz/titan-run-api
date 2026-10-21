@@ -7,8 +7,11 @@ import com.titanrun.titan_run_api.model.usuario.Usuario;
 import com.titanrun.titan_run_api.repository.corrida.CorridaRepository;
 import com.titanrun.titan_run_api.repository.usuario.UsuarioRepository;
 
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.security.Security;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,28 +26,21 @@ public class CorridaService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    /*
-    SALVAR
-    */
-
+    
+    // SALVA CORRIDA
     public CorridaResponseDTO criarCorrida(CorridaCreateDTO dto) {
-
-        /*REGRE DE NEGÓCIO*/
-
         if (dto.distanciaKm() <= 0) {
             throw new IllegalArgumentException("A distância deve ser maior que zero campeão.");
         }
 
-        Usuario corredor = usuarioRepository.findById(dto.usuarioId())
-            .orElseThrow(() -> new RuntimeException("Usuario não encontrado"));
+        Usuario corredor = (Usuario) SecurityContextHolder.getContext()
+            .getAuthentication()
+            .getPrincipal();
 
-        // DTO -> Entity
         Corrida corrida = new Corrida();
         corrida.setDistanciaKm(dto.distanciaKm());
         corrida.setDataHoraInicio(dto.dataHora());
         corrida.setUsuario(corredor);
-
-        // Persistência
 
         Corrida corridaSalva = this.corridaRepository.save(corrida);
 
@@ -55,6 +51,16 @@ public class CorridaService {
                 corredor.getId(),
                 corredor.getNome()
         );
+    }
+
+    // DELETAR CORRIDA
+    public void deletarCorrida(Long corridaId){
+        if (corridaId == null) {
+            throw new IllegalArgumentException("O ID da corrida é obrigatório.");
+        }
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext()
+            .getAuthentication()
+            .getPrincipal();
     }
 
     //LISTAR TODAS AS CORRIDAS
@@ -68,4 +74,8 @@ public class CorridaService {
                 entity.getUsuario().getNome()
         )).collect(Collectors.toList());
     }
+
+    // LISTAR MINHAS CORRIDAS
+
+    // ATUALIZAR CORRIDA
 }
