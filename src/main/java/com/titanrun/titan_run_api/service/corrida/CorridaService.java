@@ -33,14 +33,14 @@ public class CorridaService {
             throw new IllegalArgumentException("A distância deve ser maior que zero campeão.");
         }
 
-        Usuario corredor = (Usuario) SecurityContextHolder.getContext()
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext()
             .getAuthentication()
             .getPrincipal();
 
         Corrida corrida = new Corrida();
         corrida.setDistanciaKm(dto.distanciaKm());
         corrida.setDataHoraInicio(dto.dataHora());
-        corrida.setUsuario(corredor);
+        corrida.setUsuario(usuario);
 
         Corrida corridaSalva = this.corridaRepository.save(corrida);
 
@@ -48,8 +48,8 @@ public class CorridaService {
                 corridaSalva.getId(),
                 corridaSalva.getDistanciaKm(),
                 corridaSalva.getDataHoraInicio(),
-                corredor.getId(),
-                corredor.getNome()
+                usuario.getId(),
+                usuario.getNome()
         );
     }
 
@@ -58,9 +58,19 @@ public class CorridaService {
         if (corridaId == null) {
             throw new IllegalArgumentException("O ID da corrida é obrigatório.");
         }
+
         Usuario usuario = (Usuario) SecurityContextHolder.getContext()
             .getAuthentication()
             .getPrincipal();
+
+        Corrrida corrida = corridaRepository.findById(corridaId)
+            .orElseThrow(() -> new IllegalArgumentException("Corrida não encontrada!"));
+
+        if (!corrida.getUsuario().getId().equals(usuario.getId)){
+            throw new IllegalArgumentException("Apague somente as suas corridas!");
+        }
+
+        corridaRepository.delete(corrida);
     }
 
     //LISTAR TODAS AS CORRIDAS
@@ -78,4 +88,19 @@ public class CorridaService {
     // LISTAR MINHAS CORRIDAS
 
     // ATUALIZAR CORRIDA
+    public void atualizaCorrida(CorridaCreateDTO corrida){
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext()
+            .getAuthentication()
+            .getPrincipal();
+
+        Corrrida corrida = corridaRepository.findById(corridaId)
+            .orElseThrow(() -> new IllegalArgumentException("Corrida não encontrada!"));
+        
+        if (!corrida.getUsuario().getId().equals(usuario.getId)){
+            throw new IllegalArgumentException("Atualize somente as suas corridas!");
+        }
+
+        
+
+    }
 }
