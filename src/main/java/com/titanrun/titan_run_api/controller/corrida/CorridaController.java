@@ -26,9 +26,19 @@ public class CorridaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(corridaCriada);
     }
 
-    //GET
+    //Listar todas corridas
     @GetMapping
     public List<CorridaResponseDTO> listar(){
         return service.listarTodas();
+    }
+
+    //Atualizar corrida
+    @PutMapping("/{id}")
+    public ResponseEntity<CorridaResponseDTO> atualizar(
+            @PathVariable Long id, 
+            @RequestBody CorridaUpdateDTO dto) {
+
+        CorridaResponseDTO corridaAtualizada = service.atualizarCorrida(id, dto);
+        return ResponseEntity.ok(corridaAtualizada);
     }
 }

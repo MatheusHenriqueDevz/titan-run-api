@@ -88,7 +88,7 @@ public class CorridaService {
     // LISTAR MINHAS CORRIDAS
 
     // ATUALIZAR CORRIDA
-    public void atualizaCorrida(CorridaCreateDTO corrida){
+    public void atualizaCorrida(Long corridaId, CorridaUpdateDTO dto){
         Usuario usuario = (Usuario) SecurityContextHolder.getContext()
             .getAuthentication()
             .getPrincipal();
@@ -99,8 +99,27 @@ public class CorridaService {
         if (!corrida.getUsuario().getId().equals(usuario.getId)){
             throw new IllegalArgumentException("Atualize somente as suas corridas!");
         }
-
         
+        if(dto.distanciaKm() != null){
+            if(dto.distanciaKm() <= 0){
+                throw new IllegalArgumentException("A distância tem que seri maior que 0!");
+            }
 
+            corrida.setDistanciaKm(dto.distanciaKm());
+        }
+
+        if(dto.dataHora() != null){
+            corrida.setDataHora(dto.dataHora());
+        }
+
+        Corrida corridaAtualizada = corridaRepository.save(corrida);
+
+        return new CorridaResponseDTO(
+            corridaAtualizada.getId(),
+            corridaAtualizada.getDistanciaKm(),
+            corridaAtualizada.getDataHoraInicio(),
+            usuario.getId(),
+            usuario.getNome()
+        );
     }
 }
