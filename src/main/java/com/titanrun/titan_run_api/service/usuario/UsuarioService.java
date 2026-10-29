@@ -53,11 +53,14 @@ public class UsuarioService {
         Usuario usuario = repository.findById(usuarioId)
             .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado."));
         
-        
+
         repository.delete(ususario);
     }
 
     // ATUALIZAR USUARIO
+    public UsuarioResponseDTO atualizarUsuario(Long ususarioId,UsuarioUpdateDTO dto){
+        
+    }
 
     // BUSCAR USUARIO
     

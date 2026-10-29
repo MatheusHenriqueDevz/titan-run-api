@@ -15,7 +15,7 @@ import com.titanrun.titan_run_api.model.usuario.Usuario;
 @Service
 public class TokenService {
 
-    private String secret = "titanrunsecretkey";
+    private String secret = "silviaSaf";
 
     public String gerarToken(Usuario usuario) {
         try{
