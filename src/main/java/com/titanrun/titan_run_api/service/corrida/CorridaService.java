@@ -86,6 +86,21 @@ public class CorridaService {
     }
 
     // LISTAR MINHAS CORRIDAS
+    public List<CorridaResponseDTO> listarMinhasCorridas(){
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext()
+            .getAuthentication()
+            .getPrincipal();
+        
+        return corridaRepository.findByUsuario(usuario)
+                .stream()
+                .map(entity -> new CorridaResponseDTO(
+                entity.getId(),
+                entity.getDistanciaKm(),
+                entity.getDataHoraInicio(),
+                entity.getUsuario().getId(),
+                entity.getUsuario().getNome()
+        )).collect(Collectors.toList());
+    }
 
     // ATUALIZAR CORRIDA
     public void atualizaCorrida(Long corridaId, CorridaUpdateDTO dto){

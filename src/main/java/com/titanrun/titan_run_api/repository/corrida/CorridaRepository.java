@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface CorridaRepository extends JpaRepository<Corrida, Long> {
-
+    List<Corrida> findByUsuario(Usuario usuario);
 }
