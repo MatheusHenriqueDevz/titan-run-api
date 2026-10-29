@@ -27,7 +27,7 @@ public class CorridaService {
     }
 
     
-    // SALVA CORRIDA
+    // CRIAR CORRIDA
     public CorridaResponseDTO criarCorrida(CorridaCreateDTO dto) {
         if (dto.distanciaKm() <= 0) {
             throw new IllegalArgumentException("A distância deve ser maior que zero campeão.");

@@ -19,6 +19,7 @@ public class UsuarioService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    // CADASTRAR USUARIO
     public UsuarioResponseDTO cadastrarUsuario(UsuarioCreateDTO dto) {
         if (repository.existsByEmail(dto.email())) {
             throw new IllegalArgumentException("Este email já está em uso, tente outro email.");
@@ -38,5 +39,26 @@ public class UsuarioService {
             usuarioSalvo.getEmail()
         );              
     }
+
+    // DELETAR USUARIO
+    public void deletarUsuario(Long usuarioId){
+        if (!usuarioId.equals(usuario.getId())){
+            throw new IllegalArgumentException("Error: Só é permitido apagar o próprio ususário!!!");
+        }
+
+        Usuario usuario = (Usuario) SecurityContextHolder.getContext()
+            .getAuthentication()
+            .getPrincipal();
+
+        Usuario usuario = repository.findById(usuarioId)
+            .orElseThrow(() -> new IllegalArgumentException("Usuário não encontrado."));
+        
+        
+        repository.delete(ususario);
+    }
+
+    // ATUALIZAR USUARIO
+
+    // BUSCAR USUARIO
     
 }
