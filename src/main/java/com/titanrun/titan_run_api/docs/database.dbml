@@ -1,0 +1,17 @@
+// ==========================================
+// TITANRUN API - MODELAGEM DE DADOS
+// ==========================================
+
+Table tb_usuarios {
+  id int [pk, increment]
+  nome varchar [not null]
+  email varchar [unique, not null]
+  senha varchar [not null]
+}
+
+Table tb_corridas {
+  id int [pk, increment]
+  distancia_km decimal [not null]
+  data_hora_inicio timestamp [not null]
+  usuario_id int [ref: > tb_usuarios.id]
+}
